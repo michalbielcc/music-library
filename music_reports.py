@@ -8,6 +8,8 @@ def import_music(music, filename='text_albums_data.txt'):
         i = line.split(',')
         music1.append(i)
     for i in music1:
+        del i[-1]
+    for i in music1:
         music.append(i)
     txt.close()
 
