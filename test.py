@@ -160,7 +160,7 @@ def find_by_artist():
             if AskAgain == "y":
                 find_by_artist()
             if AskAgain == "n":
-                print("ide do menu")
+                main()
 
     if search not in music:
         print("Type name correctly")
@@ -254,7 +254,13 @@ def main():
 
     if choice == '4':
         find_longest_shortest()
-        print(longest_shortest)
+        print(tabulate(longest_shortest, ["Artist", "Album", "Year", "Genre", "Time"]))
+        Ask = input("Do you want back to menu? y for yes, n for no")
+        if Ask == "y":
+            main()
+        if Ask == "n":
+            print("Good bye :) ")
+
 
     if choice == '5':
         find_by_artist()
@@ -277,11 +283,17 @@ def main():
         print('Albums count by genre:')
         count_by_genre()
 
+        choice_7_foolproof()
 
-        if input("Do you want back to menu? y for yes, n for no") == "y":
-            main()
-        else:
-            print("Good bye :) ")
+def choice_7_foolproof():
+    Ask = input("Do you want back to menu? y for yes, n for no")
+    if Ask == "y":
+        main()
+    if Ask == "n":
+        print("Good bye :) ")
+    else:
+        print("type right command")
+        choice_7_foolproof()
 
 
 main()
