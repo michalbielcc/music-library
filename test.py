@@ -1,5 +1,5 @@
-
 from tabulate import tabulate
+
 music = []
 genre_list = []
 time_list = []
@@ -9,9 +9,6 @@ all_genres = []
 oldest_youngest = []
 count_by_genre_list = []
 count_by_genre_set = set(count_by_genre_list)
-
-
-
 
 def import_music(music, filename='text_albums_data.txt'):
     txt = open(filename, 'r')
@@ -27,12 +24,7 @@ def import_music(music, filename='text_albums_data.txt'):
 
 import_music(music, filename='text_albums_data.txt')
 
-
-
 print(music)
-
-
-
 
 
 def find_all_genres():
@@ -55,12 +47,6 @@ def find_time_range(year, year2):
         if int(x[2]) in range(int(year), int(year2)+1):
             time_list.append(x)
 
-
-
-def find_time_range(year, year2):
-    for x in music:
-        if int(x[2]) in range(int(year), int(year2)+1):
-            time_list.append(x)
 
   
 
@@ -99,11 +85,6 @@ def find_longest_shortest():
 #print(longest_shortest)
 
 
-
-
-
-    
-
 def find_longest_shortest():
     length_list1 = []
     length_list2 = []
@@ -137,12 +118,8 @@ def find_by_album():
     for i in music:
         if search in i[1]:
             print("Album: ", i)
-            AskAgain = input("wanna search again? Press y for yes or n for no ")
-            if AskAgain == "y":
-                find_by_album()
-            if AskAgain == "n":
-                print("ide do menu")
-                main()
+            Find_Album_Foolproof()
+
 
     if search not in music:
         print("Type album correctly")
@@ -155,12 +132,7 @@ def find_by_artist():
     for i in music:
         if search in i[0]:
             print("Album: ", i)
-            AskAgain=input("wanna search again? Press y for yes or n for no ")
-
-            if AskAgain == "y":
-                find_by_artist()
-            if AskAgain == "n":
-                print("ide do menu")
+            Find_Artist_Foolproof()
 
     if search not in music:
         print("Type name correctly")
@@ -227,13 +199,7 @@ def main():
         a = input('Enter genre: ')
         find_genre(a)
         print(tabulate(genre_list, ["Artist", "Album", "Year", "Genre", "Time"]))
-        SearchGenreAsk = input("Do you want back to menu? y for yes, n for no")
-        if SearchGenreAsk == "y":
-            main()
-        if SearchGenreAsk == "n":
-            print("Good Bye")
-
-
+        Search_Genre_foolproof()
 
 
 
@@ -242,19 +208,17 @@ def main():
         year2 = input(' Enter ending date (year): ')
         find_time_range(year, year2)
         print(tabulate(time_list, ["Artist", "Album", "Year", "Genre", "Time"]))
+        Search_Year_foolproof()
 
-
-        SearchYearAsk = input("Do you want back to menu? y for yes, n for no")
-        if SearchYearAsk == "y":
-            main()
-        if SearchYearAsk == "n":
-            print("Good Bye")
 
 
 
     if choice == '4':
         find_longest_shortest()
-        print(longest_shortest)
+        print(tabulate(longest_shortest, ["Artist", "Album", "Year", "Genre", "Time"]))
+        Search_Year_foolproof()
+
+
 
     if choice == '5':
         find_by_artist()
@@ -277,11 +241,52 @@ def main():
         print('Albums count by genre:')
         count_by_genre()
 
+        choice_7_foolproof()
 
-        if input("Do you want back to menu? y for yes, n for no") == "y":
-            main()
-        else:
-            print("Good bye :) ")
+def choice_7_foolproof():
+    Ask = input("Do you want back to menu? y for yes, n for no").lower()
+    if Ask == "y":
+        main()
+    if Ask == "n":
+        print("Good bye :) ")
+    else:
+        print("type right command")
+        choice_7_foolproof()
 
+def Search_Year_foolproof():
+    SearchYearAsk = input("Do you want back to menu? y for yes, n for no").lower()
+    if SearchYearAsk == "y":
+        main()
+    if SearchYearAsk == "n":
+        print("Good Bye")
+    else:
+        print('Type right command')
+        Search_Year_foolproof()
+
+def Search_Genre_foolproof():
+    SearchGenreAsk = input("Do you want back to menu? y for yes, n for no")
+    if SearchGenreAsk == "y":
+        main()
+    if SearchGenreAsk == "n":
+        print("Good Bye")
+    else:
+        print("type right command")
+        Search_Genre_foolproof()
+
+def Find_Album_Foolproof():
+    AskAgain = input("wanna search again? Press y for yes or n for no ").lower()
+    if AskAgain == "y":
+        find_by_album()
+    if AskAgain == "n":
+        print("ide do menu")
+        main()
+
+def Find_Artist_Foolproof():
+    AskAgain = input("wanna search again? Press y for yes or n for no ").lower()
+    if AskAgain == "y":
+        find_by_album()
+    if AskAgain == "n":
+        print("ide do menu")
+        main()
 
 main()
