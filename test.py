@@ -168,10 +168,17 @@ def find_by_artist():
 
 def oldest_youngest_album():
     oldest_youngest1 = []
+    oldest_youngest2 = []
     for x in music:
         oldest_youngest1.append(int(x[2]))
-    sorted(oldest_youngest).append(x[0])
-    sorted(oldest_youngest).append(x[-1])
+    oldest_youngest2 = sorted(oldest_youngest1)
+    a = oldest_youngest2[0]
+    b = oldest_youngest2[-1]
+    for x in music:
+        if int(x[2]) == a:
+            oldest_youngest.append(x)
+        if int(x[2]) == b:
+            oldest_youngest.append(x)
 
 
 
@@ -183,8 +190,11 @@ def count_by_genre():
         count_by_genre_list.append(x[3])
     for x in count_by_genre_list:
         count_by_genre_set.add(x)
+    for x in count_by_genre_set:
+        print(x + ": " + str(count_by_genre_list.count(x)))
 
-
+def album_count():
+    print(len(music))
 
 
 def main():
@@ -255,14 +265,23 @@ def main():
     if choice == '7':
         print('The longest and shortest albums are:')
         find_longest_shortest()
-        print(longest_shortest)
+        print(tabulate(longest_shortest, ["Artist", "Album", "Year", "Genre", "Time"]))
+        print("\n")
         print('The oldest and youngest albums are:')
         oldest_youngest_album()
-        print(oldest_youngest)
+        print(tabulate(oldest_youngest, ["Artist", "Album", "Year", "Genre", "Time"]))
+        print("\n")
         print('Number of albums in database: ', end = '')
         album_count()
+        print("\n")
         print('Albums count by genre:')
         count_by_genre()
+
+
+        if input("Do you want back to menu? y for yes, n for no") == "y":
+            main()
+        else:
+            print("Good bye :) ")
 
 
 main()
