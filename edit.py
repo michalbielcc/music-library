@@ -1,6 +1,7 @@
 music = []
 new_entries = []
 musicx = []
+
 def import_music(music, filename='text_albums_data.txt'):
     txt = open(filename, 'r')
     music1 = []
@@ -15,9 +16,7 @@ def import_music(music, filename='text_albums_data.txt'):
 
 
 def edit(music, filename='text_albums_data.txt'):
-    music = []
-    new_entries = []
-    musicx = []
+
     album_list = []
 
     import_music(music, filename='text_albums_data.txt')
@@ -29,11 +28,10 @@ def edit(music, filename='text_albums_data.txt'):
         
     search = input('Enter name of album You want to edit: ').lower().title()
 
-    for i in music:
-        album_list.append(i[1])
-    
-    if search not in album_list:
-        edit(music, filename='text_albums_data.txt')
+    while search not in album_list:
+        search = input('Name does not apear in database, try again: ').lower().title()
+        
+        
     else:
         pass
 
