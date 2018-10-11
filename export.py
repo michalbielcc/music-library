@@ -2,11 +2,8 @@ new_entries = []
 
 def add_new_album():
     a = input('Enter artist name: ').lower()
-    new_entries.append(str(a.title()))
-    new_entries.append(',')
 
     b = input('Enter album name: ').lower()
-    new_entries.append(str(b.title()))
 
     while True:
         try:
@@ -20,9 +17,10 @@ def add_new_album():
 
     while True:
         try:
+
             e = input('Enter length of album (format: minutes:seconds): ')
             list(e)
-            x = int(e[-2])
+            x = int(e[-2:-1])
             x = int(e[-1])
             x = int(e[:-4])
 
@@ -40,7 +38,7 @@ def add_new_album():
         except ValueError:
             print('Please submit time in given format: minutes:seconds')
             
-    new_entries.extend((',', c, ',', d, ',', e, ',', '\n'))
+    new_entries.extend(((str(a.title())),',', (str(b.title())), ',', c, ',', d, ',', e, ',', '\n'))
 
 
     export_file(new_entries, input)
@@ -62,7 +60,6 @@ def export_file(new_entries, input):
             y.write(i)
         y.close()
         another()
-
 
     if x == '2':
         x = input('Enter file name: ')
