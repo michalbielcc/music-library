@@ -1,5 +1,6 @@
 music = []
 new_entries = []
+musicx = []
 def import_music(music, filename='text_albums_data.txt'):
     txt = open(filename, 'r')
     music1 = []
@@ -13,28 +14,34 @@ def import_music(music, filename='text_albums_data.txt'):
     txt.close()
 
 
-
-
-
 def edit(music, filename='text_albums_data.txt'):
     music = []
     new_entries = []
-    import_music(music, filename='text_albums_data.txt')
-    for i in music:
-        print(i)
+    musicx = []
+    album_list = []
 
+    import_music(music, filename='text_albums_data.txt')
+
+    for i in music:
+        album_list.append(i[1])
+    for i in album_list:
+        print(i)
+        
     search = input('Enter name of album You want to edit: ').lower().title()
-    print(search)
+
+    for i in music:
+        album_list.append(i[1])
+    
+    if search not in album_list:
+        edit(music, filename='text_albums_data.txt')
+    else:
+        pass
 
     for i in music:
         if search in i[1]:
             index_of_album = music.index(i)
             print(index_of_album)
-            print("Album: ", i)
             music.remove(i)
-            for i in music:
-                print(i)
-
 
             a = input('Enter artist name: ').lower()
             b = input('Enter album name: ').lower()
@@ -73,36 +80,23 @@ def edit(music, filename='text_albums_data.txt'):
                     break
                 except ValueError:
                     print('Please submit time in given format: minutes:seconds')
-            
-                        
+                                    
             new_entries.extend(((str(a.title())), (str(b.title())), c, d, e))            
-            print(new_entries)
-
-                
             music.insert(index_of_album , new_entries)
-            print('1234')
-            for i in music:
-                print(i)
             
             for i in music:
-                for j in i:
-                    j = j + ','
-
-            for i in music:
-                print(i)
-
- #       music_file = open('text_albums_data.txt', 'w')
- #       for i in music:
-  #          music_file.write(i)
-   #     music_file.close()
-    #    a = input('Want to edit another one? [ 1 ] for yes ')
-     #   while a == '1':
-      #      add_new_album()
-       # else:
-        #    pass  
+                musicx.append((','.join(i))+','+'\n')
+    
+            music_file = open('text_albums_data.txt', 'w')
+            for i in musicx:
+                music_file.write(i)
+            music_file.close()
+            a = input('Want to edit another one? [ 1 ] for yes ')
+            while a == '1':
+                add_new_album()
+            else:
+                pass  
         
-
-
 edit(music, filename='text_albums_data.txt')
 
 
